@@ -1,0 +1,211 @@
+---
+title: "ReproducibleScienceMT23HomeWorkDec2023"
+author: "Candidate 1066540"
+date: "2023-12-06"
+output:
+  html_document: default
+  pdf_document: default
+---
+# # QUESTION 01: Data Visualisation for Science Communication
+
+### a) Provide your figure here:
+
+```{r bad figure code}
+
+# There is no need to provide the code for your bad figure, just use echo=FALSE so the code is hidden. Make sure your figure is visible after you knit it.
+
+#install.packages("tinytex")
+#library(tinytex) # to allow kniting to a PDF.
+
+# packages installed via interface.
+# load the packages in via library() function:
+library(ggplot2)
+library(palmerpenguins)
+library(janitor)
+library(dplyr)
+# check the data is there:
+head(penguins)
+
+# Now, make a correct but misleading plot.
+ggplot(data=penguins, aes(x= flipper_length_mm, y = body_mass_g)) +
+  geom_point() 
+
+
+```
+# # # b)
+
+The plot produced here is misleading, as while the data is shown for all three penguin species in the palmerpenguins package - Adelie, Gentoo and Chinstrap, the data points for one species cannot be identified from those of either of the other two species present on the plot.This is grossly misleading for the reader and a demonstration of poor data communication.To better communicate the data visually, the data points could be colour coded for each penguin species, thus enabling patterns within and between species to be visually discerned by the reader. Colour coding in plots can be a very useful tool (though care should be taken for colour blind people when choosing colours for plots). An effective use of colour is that shown by the bar charts communicating data on attempts to reproduce a work in the article by M.Baker.
+
+The above scatter plot here also lacks mention in itself that there are three species of penguin being represented by and a title, again misleading the reader.
+
+Reference:
+
+Baker,M., (2016). Is there a reproducibility crisis? A Nature survey lifts the lid on how researchers view the 'crisis' rocking science and what they think will help , Nature , Vol.535, pp.452-454.
+
+
+# # Question 2: Data Pipeline 
+
+### Introduction
+
+Penguins are small to large flightless birds mostly found in the southern hemisphere (1). Data has been collected on a range of variables for three penguin species: Adelie, Gentoo, and Chinstrap (the palmerpenguins dataset).
+
+```{r Data Exploration}
+
+# Make sure your code prints. 
+
+# VITAL: if unsure, be sure  the Rmd being accessed is " ReproducibleScienceMT23HomeworkDec2023.Rmd". 
+
+install.packages(c("ggplot2", "palmerpenguins", "janitor", "dplyr")) # Installs all packages in one line. 
+
+library(ggplot2)
+library(palmerpenguins)
+library(janitor)
+library(dplyr) # loads the required packages for working with the penguin data.
+
+head(penguins_raw) # enables visual inspection of the RAW data. Will need to clean and process later on for better use.
+
+#knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Data Exploration continued}
+# clean the data. Ensure it is saved to the data folder in the R project, which is called AssignmentDataReproSci in this instance.
+penguins_raw
+write.csv(penguins_raw, "AssignmentDataReproSci/penguins_raw.csv") # NOTE: need to ensure "FolderName/TheRawData" is correct. Don't put "data/rawdata" if the folder name is NOT data. Applies to name of data file too.
+
+#knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Hypothesis
+Null hypothesis: Culmen depth does not increase with increasing body mass in the sampled penguin population.
+Alternate: culmen depth does change with increasing body mass in the penguin population that was sampled. 
+
+The culmen is an aspect of a bird's beak that can be measured (2). The work that follows in this report assumes culmen depth is measured where the beak connects with the rest of the bird's head. 
+
+Thought plausible, as greater body mass could imply greater muscle size and greater muscle attachment may be facilitated by a larger jaw and culmen , allowing for stronger bites and pecks. By looking at it from the scale of the whole population that was sampled, some inference cold be made about selection pressure for stringer bite and peck ability in these penguins. 
+
+It would be of interest to see whether such a relationship exists in these penguins and whether it holds for other closely related and non-closely related bird groups.
+
+### Statistical Methods
+
+A linear regression  was applied, as both variables - body mass and culmen depth - are numerical. The analysis presented here assumes conforming to normality and the assumptions of normality.
+
+Correlation between the variables - body mass and culmen depth - is visually inferred (categorically) from the slope of the regression line.
+
+The hypothesis stated in the introduction section can be formalised with respect to testing via linear regression (4):
+ - Null: the slope of the population is equal to 0
+ - Alternate: the slope of the population does not equal 0.
+```{r Statistics pt1}
+
+# Make sure your code prints. 
+
+# Make sure that your code is made to address the hypotheses being tested. Is vital for so much good science.
+
+# Refer to the bad exploratory plot and code for basics if required.
+
+# Clean the data, now it is saved in the folder AssignmentDataReproSci. 
+penguins_raw <- read.csv("AssignmentDataReproSci/penguins_raw.csv") # ENSURE all typed correctly.
+
+names(penguins_raw)# to check the column names.
+
+# Create a new variable called penguins_clean, and remove two columns will be removed.The result is cleaned data.
+penguins_clean <- select(penguins_raw,-starts_with("Delta"))
+penguins_clean <- select(penguins_clean,-Comments)
+
+# Check the column names in the new data frame:
+names(penguins_clean) # the Delta is gone. 
+
+# using  functions to clean and further process the data is advisable.
+
+remove_NA <- function(penguins_clean) {
+  penguins_data %>%
+    na.omit()
+}
+
+# Now it has been cleaned (in line with the lesson), adjust if needed to suit testing of the hypothesis.
+
+ggplot(data=penguins_clean, aes(x=Body.Mass..g., y=Culmen.Depth..mm.)) +
+  geom_point(colour = "blue")  # produces an exploratory scatter plot for the explanatory and response variables with respect to the three penguin species.
+
+#knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Statistics Pt2 running a statistical test}
+
+#Running a linear regression model, as learned earlier in the MBiol FHS course (3).
+Penguin_model1 <- lm(Culmen.Depth..mm. ~ Body.Mass..g. , penguins_clean, na.rm=TRUE)
+Penguin_model1
+summary(Penguin_model1)# allows you to view the output of the linear regression model. This output applies to the overall penguin population, not individual species.
+
+# alternative way can be found here (4)
+
+#knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Results & Discussion
+
+```{r Plotting Results }
+ggplot(Penguin_model1, aes(x = Body.Mass..g. , y = Culmen.Depth..mm.)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x="Body mass of penguin (g)", y = "Culmen Depth of penguin (mm)") +
+  ggtitle("Body mass and culmen depth for the Palmer Penguins")  #found appropriate way to add a title here (5)
+# this plots the model on a labelled and titled plot. Having clear and concise but informative titles and labels is important to effectively communicate the data.
+# the grey area around the linear regression line represents the 95% confidence interval (3). 
+
+#knitr::opts_chunk$set(echo = TRUE)
+```
+# # # # Results
+The model run in the analysis provided an intercept of 22.04 (2 decimal places) that had a standard error of 0.50 ( decimal places), a t-value of 43.75 (un-rounded. 2 decimal places). The slope of the line was estimated at -0.0012 (4 decimal places) with a standard error of 0.00012 (5 decimal places). 
+
+The F-statistic produced by the model is 97.41 on 1 and 340 degrees of freedom. 
+
+The p-value was 2.2^-16, which is less than 0.05.
+
+As shown in the figure titled "Body mass and culmen depth for the Palmer Penguins", the 95% confidence interval visually lies close to the line for much of the data, though it widens near to the ends of the regression line.
+
+A negative correlation is visually apparent from the same figure , and is shown by the negative slope (m= -0.0012)of the line,  between body mass and culmen depth for the palmer penguin population. 
+
+# # # # Discussion
+The results of a regression line with a negative slope suggest that culmen depth does not increase with increasing body mass.This, and the p-value of 2.2^-16 being less than 0.05 enables rejection of the null hypothesis that culmen depth does not change with increasing body mass.
+
+The alternate hypothesis that depth of culmen does change with increasing penguin body mass is accepted. However, given the change in 95% confidence interval at the ends of the line and the spread of the data in two clusters, further, more stringent testing is strongly advocated. This would ideally have a species specific model for a focal penguin species, or a model and analysis for each penguin species. 
+
+### Conclusion
+This simplified work has found that culmen depth in the palmer penguins does change with the body mass of the penguins. For the sample population in the palmer penguins, this was an decrease in culmen depth with increase in body mass. However, skepticism is required with regard to this conclusion, given the presence of three species and two large clusters of data points.
+
+Further work could examine body mass and culmen depth with respect to individual species within a sample population or community of species, including the palmer penguins group. Such work could feed into study on selection pressures for given regions that have been or would be sampled.
+
+An alternative avenue is to investigate the matter within taxonomic groups.
+
+Even more substantial data sets and rigorous statistical methods would prove indispensable in such a work from both avenues suggested. 
+
+### References
+1. WWF (accessed 2023). Facts, [online]. Last accessed 06/12/2023. https://www.worldwildlife.org/species/penguin 
+
+2.Borras,A., Pascual,J., & Senar,J.C., (2000). What do different bill measures measure and what is the best method to use in granivorous birds? , Journal of Field Ornithology, 71(4), pp. 606-611.
+
+3. Bath,E., (2022). "Linear regression" [online]. University of Oxford, MBiol year 2 statistics: https://canvas.ox.ac.uk/courses/172666/files/5209303?module_item_id=2029946 
+
+4. Bevans,R., (2020). "Linear regression in R A Step-by-Step Guide & Examples" [online]. Last accessed 06/12/2023. https://www.scribbr.com/statistics/linear-regression-in-r/ 
+
+5.Stack overflow (accessed 2023). "add a title to a ggplot [duplicate]" . [online]. Last accessed 07/12/2023.https://stackoverflow.com/questions/64000030/add-a-tittle-to-a-ggplot 
+
+ 
+# # Question 3
+
+# # # a)
+Github link (Candidate 1066450):
+
+# # # b)
+Partner's Github link:
+
+Note: questions 3.c and 3.d answered after exchange of Github links. 
+
+# # # c)
+
+
+
+# # # d)
+
+
+

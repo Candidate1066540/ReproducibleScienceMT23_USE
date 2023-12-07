@@ -1,0 +1,659 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={ReproducibleScienceMT23HomeWorkDec2023},
+  pdfauthor={Candidate 1066540},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{ReproducibleScienceMT23HomeWorkDec2023}
+\author{Candidate 1066540}
+\date{2023-12-06}
+
+\begin{document}
+\maketitle
+
+\hypertarget{question-01-data-visualisation-for-science-communication}{%
+\section{\# QUESTION 01: Data Visualisation for Science
+Communication}\label{question-01-data-visualisation-for-science-communication}}
+
+\hypertarget{a-provide-your-figure-here}{%
+\subsubsection{a) Provide your figure
+here:}\label{a-provide-your-figure-here}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# There is no need to provide the code for your bad figure, just use echo=FALSE so the code is hidden. Make sure your figure is visible after you knit it.}
+
+\CommentTok{\#install.packages("tinytex")}
+\CommentTok{\#library(tinytex) \# to allow kniting to a PDF.}
+
+\CommentTok{\# packages installed via interface.}
+\CommentTok{\# load the packages in via library() function:}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(palmerpenguins)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'palmerpenguins' was built under R version 4.3.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(janitor)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'janitor' was built under R version 4.3.2
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'janitor'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     chisq.test, fisher.test
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'dplyr' was built under R version 4.3.2
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# check the data is there:}
+\FunctionTok{head}\NormalTok{(penguins)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 8
+##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##   <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
+## 1 Adelie  Torgersen           39.1          18.7               181        3750
+## 2 Adelie  Torgersen           39.5          17.4               186        3800
+## 3 Adelie  Torgersen           40.3          18                 195        3250
+## 4 Adelie  Torgersen           NA            NA                  NA          NA
+## 5 Adelie  Torgersen           36.7          19.3               193        3450
+## 6 Adelie  Torgersen           39.3          20.6               190        3650
+## # i 2 more variables: sex <fct>, year <int>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Now, make a correct but misleading plot.}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{penguins, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{ flipper\_length\_mm, }\AttributeTok{y =}\NormalTok{ body\_mass\_g)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{ReproducibleScienceMT23HomeworkDec2023_files/figure-latex/bad figure code-1.pdf}
+\# \# \# b)
+
+The plot produced here is misleading, as while the data is shown for all
+three penguin species in the palmerpenguins package - Adelie, Gentoo and
+Chinstrap, the data points for one species cannot be identified from
+those of either of the other two species present on the plot.This is
+grossly misleading for the reader and a demonstration of poor data
+communication.To better communicate the data visually, the data points
+could be colour coded for each penguin species, thus enabling patterns
+within and between species to be visually discerned by the reader.
+Colour coding in plots can be a very useful tool (though care should be
+taken for colour blind people when choosing colours for plots). An
+effective use of colour is that shown by the bar charts communicating
+data on attempts to reproduce a work in the article by M.Baker.
+
+The above scatter plot here also lacks mention in itself that there are
+three species of penguin being represented by and a title, again
+misleading the reader.
+
+Reference:
+
+Baker,M., (2016). Is there a reproducibility crisis? A Nature survey
+lifts the lid on how researchers view the `crisis' rocking science and
+what they think will help , Nature , Vol.535, pp.452-454.
+
+\hypertarget{question-2-data-pipeline}{%
+\section{\# Question 2: Data Pipeline}\label{question-2-data-pipeline}}
+
+\hypertarget{introduction}{%
+\subsubsection{Introduction}\label{introduction}}
+
+Penguins are small to large flightless birds mostly found in the
+southern hemisphere (1). Data has been collected on a range of variables
+for three penguin species: Adelie, Gentoo, and Chinstrap (the
+palmerpenguins dataset).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Make sure your code prints. }
+
+\CommentTok{\# VITAL: if unsure, be sure  the Rmd being accessed is " ReproducibleScienceMT23HomeworkDec2023.Rmd". }
+
+\FunctionTok{install.packages}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{, }\StringTok{"palmerpenguins"}\NormalTok{, }\StringTok{"janitor"}\NormalTok{, }\StringTok{"dplyr"}\NormalTok{)) }\CommentTok{\# Installs all packages in one line. }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: packages 'ggplot2', 'palmerpenguins', 'janitor', 'dplyr' are in use
+## and will not be installed
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(palmerpenguins)}
+\FunctionTok{library}\NormalTok{(janitor)}
+\FunctionTok{library}\NormalTok{(dplyr) }\CommentTok{\# loads the required packages for working with the penguin data.}
+
+\FunctionTok{head}\NormalTok{(penguins\_raw) }\CommentTok{\# enables visual inspection of the RAW data. Will need to clean and process later on for better use.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 17
+##   studyName `Sample Number` Species          Region Island Stage `Individual ID`
+##   <chr>               <dbl> <chr>            <chr>  <chr>  <chr> <chr>          
+## 1 PAL0708                 1 Adelie Penguin ~ Anvers Torge~ Adul~ N1A1           
+## 2 PAL0708                 2 Adelie Penguin ~ Anvers Torge~ Adul~ N1A2           
+## 3 PAL0708                 3 Adelie Penguin ~ Anvers Torge~ Adul~ N2A1           
+## 4 PAL0708                 4 Adelie Penguin ~ Anvers Torge~ Adul~ N2A2           
+## 5 PAL0708                 5 Adelie Penguin ~ Anvers Torge~ Adul~ N3A1           
+## 6 PAL0708                 6 Adelie Penguin ~ Anvers Torge~ Adul~ N3A2           
+## # i 10 more variables: `Clutch Completion` <chr>, `Date Egg` <date>,
+## #   `Culmen Length (mm)` <dbl>, `Culmen Depth (mm)` <dbl>,
+## #   `Flipper Length (mm)` <dbl>, `Body Mass (g)` <dbl>, Sex <chr>,
+## #   `Delta 15 N (o/oo)` <dbl>, `Delta 13 C (o/oo)` <dbl>, Comments <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#knitr::opts\_chunk$set(echo = TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# clean the data. Ensure it is saved to the data folder in the R project, which is called AssignmentDataReproSci in this instance.}
+\NormalTok{penguins\_raw}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 344 x 17
+##    studyName `Sample Number` Species         Region Island Stage `Individual ID`
+##    <chr>               <dbl> <chr>           <chr>  <chr>  <chr> <chr>          
+##  1 PAL0708                 1 Adelie Penguin~ Anvers Torge~ Adul~ N1A1           
+##  2 PAL0708                 2 Adelie Penguin~ Anvers Torge~ Adul~ N1A2           
+##  3 PAL0708                 3 Adelie Penguin~ Anvers Torge~ Adul~ N2A1           
+##  4 PAL0708                 4 Adelie Penguin~ Anvers Torge~ Adul~ N2A2           
+##  5 PAL0708                 5 Adelie Penguin~ Anvers Torge~ Adul~ N3A1           
+##  6 PAL0708                 6 Adelie Penguin~ Anvers Torge~ Adul~ N3A2           
+##  7 PAL0708                 7 Adelie Penguin~ Anvers Torge~ Adul~ N4A1           
+##  8 PAL0708                 8 Adelie Penguin~ Anvers Torge~ Adul~ N4A2           
+##  9 PAL0708                 9 Adelie Penguin~ Anvers Torge~ Adul~ N5A1           
+## 10 PAL0708                10 Adelie Penguin~ Anvers Torge~ Adul~ N5A2           
+## # i 334 more rows
+## # i 10 more variables: `Clutch Completion` <chr>, `Date Egg` <date>,
+## #   `Culmen Length (mm)` <dbl>, `Culmen Depth (mm)` <dbl>,
+## #   `Flipper Length (mm)` <dbl>, `Body Mass (g)` <dbl>, Sex <chr>,
+## #   `Delta 15 N (o/oo)` <dbl>, `Delta 13 C (o/oo)` <dbl>, Comments <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write.csv}\NormalTok{(penguins\_raw, }\StringTok{"AssignmentDataReproSci/penguins\_raw.csv"}\NormalTok{) }\CommentTok{\# }\AlertTok{NOTE}\CommentTok{: need to ensure "FolderName/TheRawData" is correct. Don\textquotesingle{}t put "data/rawdata" if the folder name is NOT data. Applies to name of data file too.}
+
+\CommentTok{\#knitr::opts\_chunk$set(echo = TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{hypothesis}{%
+\subsubsection{Hypothesis}\label{hypothesis}}
+
+Null hypothesis: Culmen depth does not increase with increasing body
+mass in the sampled penguin population. Alternate: culmen depth does
+change with increasing body mass in the penguin population that was
+sampled.
+
+The culmen is an aspect of a bird's beak that can be measured (2). The
+work that follows in this report assumes culmen depth is measured where
+the beak connects with the rest of the bird's head.
+
+Thought plausible, as greater body mass could imply greater muscle size
+and greater muscle attachment may be facilitated by a larger jaw and
+culmen , allowing for stronger bites and pecks. By looking at it from
+the scale of the whole population that was sampled, some inference cold
+be made about selection pressure for stringer bite and peck ability in
+these penguins.
+
+It would be of interest to see whether such a relationship exists in
+these penguins and whether it holds for other closely related and
+non-closely related bird groups.
+
+\hypertarget{statistical-methods}{%
+\subsubsection{Statistical Methods}\label{statistical-methods}}
+
+A linear regression was applied, as both variables - body mass and
+culmen depth - are numerical. The analysis presented here assumes
+conforming to normality and the assumptions of normality.
+
+Correlation between the variables - body mass and culmen depth - is
+visually inferred (categorically) from the slope of the regression line.
+
+The hypothesis stated in the introduction section can be formalised with
+respect to testing via linear regression (4): - Null: the slope of the
+population is equal to 0 - Alternate: the slope of the population does
+not equal 0.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Make sure your code prints. }
+
+\CommentTok{\# Make sure that your code is made to address the hypotheses being tested. Is vital for so much good science.}
+
+\CommentTok{\# Refer to the bad exploratory plot and code for basics if required.}
+
+\CommentTok{\# Clean the data, now it is saved in the folder AssignmentDataReproSci. }
+\NormalTok{penguins\_raw }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"AssignmentDataReproSci/penguins\_raw.csv"}\NormalTok{) }\CommentTok{\# ENSURE all typed correctly.}
+
+\FunctionTok{names}\NormalTok{(penguins\_raw)}\CommentTok{\# to check the column names.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "X"                   "studyName"           "Sample.Number"      
+##  [4] "Species"             "Region"              "Island"             
+##  [7] "Stage"               "Individual.ID"       "Clutch.Completion"  
+## [10] "Date.Egg"            "Culmen.Length..mm."  "Culmen.Depth..mm."  
+## [13] "Flipper.Length..mm." "Body.Mass..g."       "Sex"                
+## [16] "Delta.15.N..o.oo."   "Delta.13.C..o.oo."   "Comments"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create a new variable called penguins\_clean, and remove two columns will be removed.The result is cleaned data.}
+\NormalTok{penguins\_clean }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(penguins\_raw,}\SpecialCharTok{{-}}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"Delta"}\NormalTok{))}
+\NormalTok{penguins\_clean }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(penguins\_clean,}\SpecialCharTok{{-}}\NormalTok{Comments)}
+
+\CommentTok{\# Check the column names in the new data frame:}
+\FunctionTok{names}\NormalTok{(penguins\_clean) }\CommentTok{\# the Delta is gone. }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "X"                   "studyName"           "Sample.Number"      
+##  [4] "Species"             "Region"              "Island"             
+##  [7] "Stage"               "Individual.ID"       "Clutch.Completion"  
+## [10] "Date.Egg"            "Culmen.Length..mm."  "Culmen.Depth..mm."  
+## [13] "Flipper.Length..mm." "Body.Mass..g."       "Sex"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# using  functions to clean and further process the data is advisable.}
+
+\NormalTok{remove\_NA }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(penguins\_clean) \{}
+\NormalTok{  penguins\_data }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{na.omit}\NormalTok{()}
+\NormalTok{\}}
+
+\CommentTok{\# Now it has been cleaned (in line with the lesson), adjust if needed to suit testing of the hypothesis.}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{penguins\_clean, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Body.Mass..g., }\AttributeTok{y=}\NormalTok{Culmen.Depth..mm.)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{colour =} \StringTok{"blue"}\NormalTok{)  }\CommentTok{\# produces an exploratory scatter plot for the explanatory and response variables with respect to the three penguin species.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 2 rows containing missing values (`geom_point()`).
+\end{verbatim}
+
+\includegraphics{ReproducibleScienceMT23HomeworkDec2023_files/figure-latex/Statistics pt1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#knitr::opts\_chunk$set(echo = TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Running a linear regression model, as learned earlier in the MBiol FHS course (3).}
+\NormalTok{Penguin\_model1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(Culmen.Depth..mm. }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Body.Mass..g. , penguins\_clean, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: In lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...) :
+##  extra argument 'na.rm' will be disregarded
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Penguin\_model1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Culmen.Depth..mm. ~ Body.Mass..g., data = penguins_clean, 
+##     na.rm = TRUE)
+## 
+## Coefficients:
+##   (Intercept)  Body.Mass..g.  
+##     22.033946      -0.001162
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(Penguin\_model1)}\CommentTok{\# allows you to view the output of the linear regression model. This output applies to the overall penguin population, not individual species.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = Culmen.Depth..mm. ~ Body.Mass..g., data = penguins_clean, 
+##     na.rm = TRUE)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.7437 -1.2235 -0.0116  1.2326  4.3468 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   22.0339465  0.5036206   43.75   <2e-16 ***
+## Body.Mass..g. -0.0011621  0.0001177   -9.87   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.744 on 340 degrees of freedom
+##   (2 observations deleted due to missingness)
+## Multiple R-squared:  0.2227, Adjusted R-squared:  0.2204 
+## F-statistic: 97.41 on 1 and 340 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# alternative way can be found here (4)}
+
+\CommentTok{\#knitr::opts\_chunk$set(echo = TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{results-discussion}{%
+\subsubsection{Results \& Discussion}\label{results-discussion}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(Penguin\_model1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Body.Mass..g. , }\AttributeTok{y =}\NormalTok{ Culmen.Depth..mm.)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Body mass of penguin (g)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Culmen Depth of penguin (mm)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Body mass and culmen depth for the Palmer Penguins"}\NormalTok{)  }\CommentTok{\#found appropriate way to add a title here (5)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{ReproducibleScienceMT23HomeworkDec2023_files/figure-latex/Plotting Results-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# this plots the model on a labelled and titled plot. Having clear and concise but informative titles and labels is important to effectively communicate the data.}
+\CommentTok{\# the grey area around the linear regression line represents the 95\% confidence interval (3). }
+
+\CommentTok{\#knitr::opts\_chunk$set(echo = TRUE)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{results}{%
+\section{\# \# \# Results}\label{results}}
+
+The model run in the analysis provided an intercept of 22.04 (2 decimal
+places) that had a standard error of 0.50 ( decimal places), a t-value
+of 43.75 (un-rounded. 2 decimal places). The slope of the line was
+estimated at -0.0012 (4 decimal places) with a standard error of 0.00012
+(5 decimal places).
+
+The F-statistic produced by the model is 97.41 on 1 and 340 degrees of
+freedom.
+
+The p-value was 2.2\^{}-16, which is less than 0.05.
+
+As shown in the figure titled ``Body mass and culmen depth for the
+Palmer Penguins'', the 95\% confidence interval visually lies close to
+the line for much of the data, though it widens near to the ends of the
+regression line.
+
+A negative correlation is visually apparent from the same figure , and
+is shown by the negative slope (m= -0.0012)of the line, between body
+mass and culmen depth for the palmer penguin population.
+
+\hypertarget{discussion}{%
+\section{\# \# \# Discussion}\label{discussion}}
+
+The results of a regression line with a negative slope suggest that
+culmen depth does not increase with increasing body mass.This, and the
+p-value of 2.2\^{}-16 being less than 0.05 enables rejection of the null
+hypothesis that culmen depth does not change with increasing body mass.
+
+The alternate hypothesis that depth of culmen does change with
+increasing penguin body mass is accepted. However, given the change in
+95\% confidence interval at the ends of the line and the spread of the
+data in two clusters, further, more stringent testing is strongly
+advocated. This would ideally have a species specific model for a focal
+penguin species, or a model and analysis for each penguin species.
+
+\hypertarget{conclusion}{%
+\subsubsection{Conclusion}\label{conclusion}}
+
+This simplified work has found that culmen depth in the palmer penguins
+does change with the body mass of the penguins. For the sample
+population in the palmer penguins, this was an decrease in culmen depth
+with increase in body mass. However, skepticism is required with regard
+to this conclusion, given the presence of three species and two large
+clusters of data points.
+
+Further work could examine body mass and culmen depth with respect to
+individual species within a sample population or community of species,
+including the palmer penguins group. Such work could feed into study on
+selection pressures for given regions that have been or would be
+sampled.
+
+An alternative avenue is to investigate the matter within taxonomic
+groups.
+
+Even more substantial data sets and rigorous statistical methods would
+prove indispensable in such a work from both avenues suggested.
+
+\hypertarget{references}{%
+\subsubsection{References}\label{references}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  WWF (accessed 2023). Facts, {[}online{]}. Last accessed 06/12/2023.
+  \url{https://www.worldwildlife.org/species/penguin}
+\end{enumerate}
+
+2.Borras,A., Pascual,J., \& Senar,J.C., (2000). What do different bill
+measures measure and what is the best method to use in granivorous
+birds? , Journal of Field Ornithology, 71(4), pp.~606-611.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\item
+  Bath,E., (2022). ``Linear regression'' {[}online{]}. University of
+  Oxford, MBiol year 2 statistics:
+  \url{https://canvas.ox.ac.uk/courses/172666/files/5209303?module_item_id=2029946}
+\item
+  Bevans,R., (2020). ``Linear regression in R A Step-by-Step Guide \&
+  Examples'' {[}online{]}. Last accessed 06/12/2023.
+  \url{https://www.scribbr.com/statistics/linear-regression-in-r/}
+\end{enumerate}
+
+5.Stack overflow (accessed 2023). ``add a title to a ggplot
+{[}duplicate{]}'' . {[}online{]}. Last accessed
+07/12/2023.https://stackoverflow.com/questions/64000030/add-a-tittle-to-a-ggplot
+
+\hypertarget{question-3}{%
+\section{\# Question 3}\label{question-3}}
+
+\hypertarget{a}{%
+\section{\# \# a)}\label{a}}
+
+Github link (Candidate 1066450):
+
+\hypertarget{b}{%
+\section{\# \# b)}\label{b}}
+
+Partner's Github link:
+
+Note: questions 3.c and 3.d answered after exchange of Github links.
+
+\hypertarget{c}{%
+\section{\# \# c)}\label{c}}
+
+\hypertarget{d}{%
+\section{\# \# d)}\label{d}}
+
+\end{document}
